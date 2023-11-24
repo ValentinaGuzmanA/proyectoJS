@@ -4,7 +4,7 @@ import swal from "sweetalert";
 import data from "../../bbdd.json";
 
 const Login = () => {
-  // Para redirecconar de un componente a otro
+  // Esta sirve para redirecconar de un componente a otro
   const navigate = useNavigate();
 
   // Estado inicial de las variables
@@ -44,7 +44,7 @@ const Login = () => {
         },
       });
     } else {
-      const usuario = data.Pacientes.find(paciente => paciente.email === email);
+      const usuario = data.Empleado.find(Empleado => Empleado.email === email);
   
       if (usuario) {
         if (usuario.password === password) {
@@ -114,13 +114,13 @@ const Login = () => {
       <div className="login-box">
         <div className="login-logo">
           <Link to={"#"}>
-            <b>Inicio de Sesion</b>
+            <b>MI DULCE ONLINE</b>
           </Link>
         </div>
         <div className="card">
           <div className="card-body login-card-body">
             <p className="login-box-msg">
-              Bienvenido, Ingrese sus credenciales
+              Bienvenido, Ingrese Mi dulce online
             </p>
             <form onSubmit={onSubmit}>
               <div className="input-group mb-3">

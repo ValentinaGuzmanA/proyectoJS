@@ -8,17 +8,17 @@ import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert";
 import { Link, useNavigate } from "react-router-dom";
 
-const ProyectosAdmin = () => {
+const ProyectosA = () => {
     // Para redirecconar de un componente a otro
   const navigate = useNavigate();
 
-    const eliminarPaciente = async (e, idPaciente) => {
+    const eliminarEmpleado = async (e, idEmpleado) => {
         e.preventDefault();
-        const response = await APIInvoke.invokeDELETE(`/Pacientes/${idPaciente}`); 
+        const response = await APIInvoke.invokeDELETE(`/Empleado/${idEmpleado}`); 
         console.log(response);
         swal({
             title: "Información",
-            text: 'El paciente fue borrado correctamente',
+            text: 'El Empleado fue Eliminado',
             icon: "success",
             buttons: {
               confirm: {
@@ -31,7 +31,7 @@ const ProyectosAdmin = () => {
             },
           });
         // Redireccionar
-        navigate("/proyectos-admin");
+        navigate("/proyectos-a");
     }
 
   return (
@@ -40,16 +40,16 @@ const ProyectosAdmin = () => {
       <SidebarContainer></SidebarContainer>
       <div className="content-wrapper">
         <ContentHeader
-          titulo={"Listado de pacientes"}
+          titulo={"Listado de Empleado"}
           breadCrumb1={"Inicio"}
-          breadCrumb2={"Pacientes"}
+          breadCrumb2={"Empleado"}
           ruta1={"/home"}
         />
 
         <section className="content">
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title"><Link to={"/pacientes-crear"} className="btn btn-block btn-primary btn-sm">Insertar paciente</Link></h3>
+              <h3 className="card-title"><Link to={"/Empleado-crear"} className="btn btn-block btn-primary btn-sm">Insertar Empleado</Link></h3>
 
               <div className="card-tools">
                 <button
@@ -74,26 +74,25 @@ const ProyectosAdmin = () => {
               <table className="table table-bordered">
                 <thead>
                   <tr>
-                    <th style={{ width: "5%" }}>Id</th>
-                    <th style={{ width: "20%" }}>Nombre</th>
-                    <th style={{ width: "20%" }}>Email</th>
-                    <th style={{ width: "20%" }}>Tipo documento</th>
-                    <th style={{ width: "15%" }}>Número documento</th>
-                    <th style={{ width: "20%" }}>Opciones</th>
+                    <th style={{ width: "10%" }}>Id</th>
+                    <th style={{ width: "25%" }}>Nombre</th>
+                    <th style={{ width: "25%" }}>Email</th>
+                    <th style={{ width: "25%" }}>identificacion</th>
+
                   </tr>
                 </thead>
                 <tbody>
-                  {data.Pacientes.map((paciente) => (
-                    <tr key={paciente.id}>
-                      <td>{paciente.id}</td>
-                      <td>{paciente.full_name}</td>
-                      <td>{paciente.email}</td>
-                      <td>{paciente.document_type}</td>
-                      <td>{paciente.document_number}</td>
+                  {data.Empleado.map((Empleado) => (
+                    <tr key={Empleado.id}>
+                      <td>{Empleado.id}</td>
+                      <td>{Empleado.nombre}</td>
+                      <td>{Empleado.email}</td>
+                      <td>{Empleado.identificacion}</td>
+                  
                       <td>
-                      <Link to={`/pacientes-editar/${paciente.id}-${paciente.full_name}-${paciente.email}-${paciente.document_type}-${paciente.document_number}-${paciente.password}`} className="btn btn-sm btn-info">Tareas</Link> &nbsp; &nbsp; 
-                        <Link to={`/pacientes-editar/${paciente.id}-${paciente.full_name}-${paciente.email}-${paciente.document_type}-${paciente.document_number}-${paciente.password}`} className="btn btn-sm btn-primary">Editar</Link> &nbsp; &nbsp; 
-                        <button onClick={(e) => eliminarPaciente(e, paciente.id)} className="btn btn-sm btn-danger">Borrar</button>
+                   
+                        <Link to={`/Empleado-editar/${Empleado.id}-${Empleado.nombre}-${Empleado.email}-${Empleado.identificacion}-${Empleado.password}`} className="btn btn-sm btn-primary">Actualizar empleado</Link> &nbsp; &nbsp; 
+                        <button onClick={(e) => eliminarEmpleado(e, Empleado.id)} className="btn btn-sm btn-danger">Eliminar</button>
                       </td>
                     </tr>
                   ))}
@@ -108,4 +107,4 @@ const ProyectosAdmin = () => {
   );
 };
 
-export default ProyectosAdmin;
+export default ProyectosA;

@@ -25,13 +25,13 @@ const Home = () => {
                             <div className="col-lg-3 col-6">
                                 <div className="small-box bg-info">
                                     <div className="inner">
-                                        <h3>Pacientes</h3>
+                                        <h3>Dulce en linea</h3>
                                         <p>&nbsp;</p>
                                     </div>
                                     <div className="icon">
                                         <i className="fa fa-edit"/>
                                     </div>
-                                    <Link to={"/proyectos-admin"} className="small-box-footer">Ver pacientes <i className="fas fa-arrow-circle-right"/></Link>
+                                    <Link to={"/proyecto-a"} className="small-box-footer">Ver Empleados <i className="fas fa-arrow-circle-right"/></Link>
                                 </div>
 
                             </div>

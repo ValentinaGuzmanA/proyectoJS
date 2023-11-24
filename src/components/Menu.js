@@ -14,10 +14,10 @@ const Menu = () => {
                     </Link>
                 </li>   
                 <li className="nav-item">
-                    <Link to={"/proyectos-admin"} className="nav-link">
+                    <Link to={"/proyectos-a"} className="nav-link">
                         <i className="nav-icon fas fa-edit" />
                         <p>
-                            Pacientes
+                            Empleados 
                         </p>
                     </Link>
                 </li>   

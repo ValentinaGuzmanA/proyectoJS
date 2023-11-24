@@ -1,70 +1,63 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
-import SidebarContainer from "./SidebarContainer";
-import ContentHeader from "./ContentHeader";
-import Footer from "./Footer";
-import { useNavigate } from "react-router-dom";
-import APIInvoke from "../utils/APIInvoke";
-import swal from 'sweetalert';
+import { useNavigate, useParams } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import SidebarContainer from "../../components/SidebarContainer";
+import ContentHeader from "../../components/ContentHeader";
+import Footer from "../../components/Footer";
+import APIInvoke from "../../utils/APIInvoke";
+import swal from "sweetalert";
 
-const InsertarPaciente = () => {
+const EmpleadoEditar = () => {
 
     const navigate = useNavigate();
 
-    const [paciente, setPaciente] = useState({
-        full_name: '',
-        email: "",
-        document_type: "",
-        document_number: "",
-        password: ""
+    const { idEmpleado } = useParams();
+    let arreglo = idEmpleado.split('-');
+    const nombreEmpleado = arreglo[1];
+    const emailEmpleado = arreglo[2];
+    const identificacionEmpleado = arreglo[3];
+    const passwordEmpleado = arreglo[4];
+
+    const [Empleado, setEmpleado] = useState({
+        nombre: nombreEmpleado,
+        email: emailEmpleado,
+        identificacion: identificacionEmpleado,
+        password: passwordEmpleado
     });
 
-    const { full_name, email, document_type, document_number, password } = paciente;
+    const { nombre, email, identificacion, password } = Empleado;
 
     useEffect(() => {
-        document.getElementById("full_name").focus();
+        document.getElementById("nombre").focus();
     }, []);
 
 
     const onChange = (e) => {
-        setPaciente({
-            ...paciente,
+        setEmpleado({
+            ...Empleado,
             [e.target.name]: e.target.value
         });
     }
 
-    const crearPaciente = async () => {
-        const data = {
-            full_name: paciente.full_name,
-            email: paciente.email,
-            document_type: paciente.document_type,
-            document_number: paciente.document_number,
-            password: paciente.password
+    const editarEmpleado = async () => {
+        let arreglo = idEmpleado.split('-');
+        const idP = arreglo[0];
 
+        const data = {
+            nombre: Empleado.nombre,
+            email: Empleado.email,
+            identificacion: Empleado.identificacion,
+            password: Empleado.password
         }
 
-        const response = await APIInvoke.invokePOST(`/Pacientes`, data);
-        const idPaciente = response.id;
+        const response = await APIInvoke.invokePUT(`/Empleado/${idP}`, data);
+        const idEmpleadoEditado = response.id;
+        console.log(idEmpleadoEditado)
+        console.log(idP)
 
-        if (idPaciente === '') {
-            const msg = 'El paciente no se registro correctamente.'
-            swal({
-                title: 'Error',
-                text: msg,
-                icon: 'error',
-                buttons: {
-                    confirm: {
-                        text: 'Ok',
-                        value: true,
-                        visible: true,
-                        className: 'btn btn-danger',
-                        closeModal: true
-                    }
-                }
-            });
-        } else {
-            navigate('/proyectos-admin');
-            const msg = 'El paciente se registro correctamente'
+        if (idEmpleadoEditado !== idP) {
+            navigate("/proyectos-a");
+            const msg = `El paciente con el id ${idEmpleadoEditado} se edito correctamente`;
             swal({
                 title: 'Información',
                 text: msg,
@@ -79,34 +72,46 @@ const InsertarPaciente = () => {
                     }
                 }
             });
-
-            setPaciente({
-                full_name: ''
+        } else {
+            const msg = 'El Empleado no se edito '
+            swal({
+                title: 'Error',
+                text: msg,
+                icon: 'error',
+                buttons: {
+                    confirm: {
+                        text: 'Ok',
+                        value: true,
+                        visible: true,
+                        className: 'btn btn-danger',
+                        closeModal: true
+                    }
+                }
             });
         }
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        crearPaciente();
+        editarEmpleado();
     }
 
-    return (
+    return ( 
         <div className="wrapper">
             <Navbar></Navbar>
             <SidebarContainer></SidebarContainer>
             <div className="content-wrapper">
                 <ContentHeader
-                    titulo={"Creación de pacientes"}
-                    breadCrumb1={"Listado de pacientes"}
-                    breadCrumb2={"Creación"}
-                    ruta1={"/proyectos-admin"}
+                    titulo={"Edición de Empleados"}
+                    breadCrumb1={"Listado de Empleados"}
+                    breadCrumb2={"Edición"}
+                    ruta1={"/proyectos-a"}
                 />
 
                 <section className="content">
                     <div className="card">
                         <div className="card-header">
-                            <h3 className="card-title"><button type="button" className="btn btn-block btn-primary btn-sm">Insertar paciente</button></h3>
+                            <h3 className="card-title"><button type="button" className="btn btn-block btn-primary btn-sm">Insertar Empleado</button></h3>
 
                             <div className="card-tools">
                                 <button
@@ -131,13 +136,13 @@ const InsertarPaciente = () => {
                             <form onSubmit={onSubmit}>
                                 <div className="card-body">
                                     <div className="form-group">
-                                        <label htmlFor="full_name">Nombre completo</label>
+                                        <label htmlFor="nombre">Nombre </label>
                                         <input type="text"
                                             className="form-control"
-                                            id="full_name"
-                                            name="full_name"
+                                            id="nombre"
+                                            name="nombre"
                                             placeholder="Ingrese nombre"
-                                            value={full_name}
+                                            value={nombre}
                                             onChange={onChange}
                                             required />
 
@@ -151,22 +156,13 @@ const InsertarPaciente = () => {
                                             onChange={onChange}
                                             required />
 
-                                        <label htmlFor="document_type">Tipo de documento</label>
-                                        <select name="document_type" className="form-control" onChange={onChange} value={document_type}>
-                                            <option></option>
-                                            <option>Cedula de ciudadania</option>
-                                            <option>Tarjeta de identidad</option>
-                                            <option>Pasaporte</option>
-                                        </select>
-
-
-                                        <label htmlFor="document_number">Número de documento</label>
-                                        <input type="number"
+                                        <label htmlFor="identificacion">identificacion</label>
+                                        <input type="text"
                                             className="form-control"
-                                            id="document_number"
-                                            name="document_number"
-                                            placeholder="Número de documento"
-                                            value={document_number}
+                                            id="identificacion"
+                                            name="identificacion"
+                                            placeholder="Ingrese un identificacion"
+                                            value={identificacion}
                                             onChange={onChange}
                                             required />
 
@@ -182,7 +178,7 @@ const InsertarPaciente = () => {
                                     </div>
                                 </div>
                                 <div className="card-footer">
-                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                    <button type="submit" className="btn btn-primary">Actualizar informacion de empleado</button>
                                 </div>
                             </form>
 
@@ -192,7 +188,7 @@ const InsertarPaciente = () => {
             </div>
             <Footer></Footer>
         </div>
-    );
+     );
 }
-
-export default InsertarPaciente;
+ 
+export default EmpleadoEditar;

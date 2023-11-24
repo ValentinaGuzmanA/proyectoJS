@@ -1,108 +1,44 @@
 {
-  "Pacientes": [
-    {
-      "full_name": "Pepito Perez",
-      "email": "pepe@gmail.com",
-      "document_type": "Cedula de ciudadania",
-      "document_number": "108976543",
-      "password": "pepe12345",
-      "id": 1
-    },
-    {
-      "full_name": "Manuela Quintero",
-      "email": "manu@gmail.com",
-      "document_type": "Tarjeta de identidad",
-      "document_number": "104532456",
-      "password": "manuela0000",
-      "id": 2
-    },
-    {
-      "full_name": "Jose Manuel",
-      "email": "josesito@gmail.com",
-      "document_type": "Tarjeta de identidad",
-      "document_number": "10456",
-      "password": "joseG101",
-      "id": 3
-    },
-    {
-      "full_name": "Camila Avila",
-      "email": "cami@hotmail.com",
-      "document_type": "Cedula de ciudadania",
-      "document_number": "2093845678",
-      "password": "camila1201",
-      "id": 4
-    }
-  ],
-  "Agendas": [
+  "Empleado": [
     {
       "id": 1,
-      "Hora": "1:30 pm",
-      "fecha": "2023-09-14",
-      "sede": "Chapinero"
+      "nombre": "Katerine parra ",
+      "email": "kate@gmail.com",
+      "identificacion": "1013588396",
+      "password": "1234567"
+  
+    
     },
     {
       "id": 2,
-      "Hora": "5:00 pm",
-      "fecha": "2023-08-26",
-      "sede": "Jimenez"
+      "nombre": "Marcela  ruiz",
+      "email": "marce@gmail.com",
+      "identificacion": "123456",
+      "password": "108976543"
+     
     },
     {
       "id": 3,
-      "Hora": "11:00 am",
-      "fecha": "2023-08-26",
-      "sede": "Jimenez"
+      "nombre": "Carlos florez",
+      "email": "carlos@gmail.com",
+      "identificacion": "456767",
+      "password": "108976543"
+     
     },
     {
       "id": 4,
-      "Hora": "8:00 am",
-      "fecha": "2023-09-26",
-      "sede": "Chapinero"
+      "nombre": "Luis diaz",
+      "email": "luis@gmail.com",
+      "identificacion": "123455",
+      "password": "108976543"
+      
     }
-  ],
-  "Autorizaciones": [
-    {
-      "id": 1,
-      "hora": "1:30 pm",
-      "nombre_paciente": "Manuela",
-      "identificacion_paciente": "104532456",
-      "agenda": 2
-    },
-    {
-      "id": 2,
-      "hora": "5:00 pm",
-      "nombre_paciente": "Pepito",
-      "identificacion_paciente": "108976543",
-      "agenda": 1
-    },
-    {
-      "id": 3,
-      "hora": "11:00 pm",
-      "nombre_paciente": "Camila",
-      "identificacion_paciente": "2093845678",
-      "agenda": 3
-    },
-    {
-      "id": 4,
-      "hora": "8:00 pm",
-      "nombre_paciente": "Jose",
-      "identificacion_paciente": "104567345",
-      "agenda": 4
-    }
-  ],
-  "Ips": [
-    {
-      "id": 1,
-      "nombre": "Juan Pablo II I.P.S S.A.S",
-      "direccion": "Calle 34 norte",
-      "dias_atencion": "L - S",
-      "hora_atencion": "7 am - 8pm"
-    },
-    {
-      "id": 2,
-      "nombre": "Hospital Infantil los Ángeles",
-      "direccion": "Calle 76 norte",
-      "dias_atencion": "L - V",
-      "hora_atencion": "8am - 7pm"
-    }
-  ]
+
+
+              ]
+  
+  
+ 
+
+
 }

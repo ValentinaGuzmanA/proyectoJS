@@ -3,26 +3,26 @@ import { Link } from 'react-router-dom';
 import APIInvoke from "../../utils/APIInvoke";
 import swal from 'sweetalert';
 
+
 const CrearCuenta = () => {
-  const [paciente, setPaciente] = useState({
-    full_name: "",
+  const [Empleado, setEmpleado] = useState({
+    nombre: "",
     email: "",
-    document_type: "",
-    document_number: "",
-    password: "",
+    identificacion: "",
+    password:"",
   });
 
-  const { full_name, email, document_type, document_number, password } = paciente;
+  const { nombre, email , identificacion , password } = Empleado;
 
   const onChange = (e) => {
-    setPaciente({
-      ...paciente,
+    setEmpleado({
+      ...Empleado,
       [e.target.name]: e.target.value,
     });
   };
 
   useEffect(() => {
-    document.getElementById("full_name").focus();
+    document.getElementById("nombre").focus();
   }, []);
 
 
@@ -45,17 +45,16 @@ const CrearCuenta = () => {
       });
     } else {
       const data = {
-        full_name: paciente.full_name,
-        email: paciente.email,
-        document_type: paciente.document_type,
-        document_number: paciente.document_number,
-        password: paciente.password
+        nombre: Empleado.nombre,
+        email: Empleado.email,
+        identificacion: Empleado.identificacion,
+        password: Empleado.password
       }
-      const response = await APIInvoke.invokePOST(`/Pacientes`, data);
+      const response = await APIInvoke.invokePOST(`/Empleado`, data);
       const mensaje = response.msg;
 
-      if(mensaje === 'El paciente ya existe') {
-        const msg = "el paciente ya existe.";
+      if(mensaje === 'El Empleado ya existe') {
+        const msg = "El Empleado ya existe.";
         swal({
           title: 'Error',
           text: msg,
@@ -100,7 +99,7 @@ const CrearCuenta = () => {
       <div className="register-box">
         <div className="register-logo">
           <Link to={"#"}>
-            <b>Bienve</b>nido
+            <b>Bienvenido a serviplus</b>
           </Link>
         </div>
         <div className="card">
@@ -114,10 +113,10 @@ const CrearCuenta = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Full name"
-                  name="full_name"
-                  id="full_name"
-                  value={full_name}
+                  placeholder="Ingresa tu nombre"
+                  name="nombre"
+                  id="nombre"
+                  value={nombre}
                   onChange={onChange}
                   required
                 />
@@ -133,7 +132,7 @@ const CrearCuenta = () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder="Email"
+                  placeholder="Ingresa tu email"
                   name="email"
                   value={email}
                   onChange={onChange}
@@ -146,33 +145,25 @@ const CrearCuenta = () => {
                 </div>
               </div>
 
-              {/* Div for document type */}
-              <div className="input-group mb-3">
-                <select name="document_type" onChange={onChange} value={document_type}>
-                  <option>Cedula de ciudadania</option>
-                  <option>Tarjeta de identidad</option>
-                  <option>Pasaporte</option>
-                </select>
-              </div>
-
-              {/* Div for document number */}
+            
+              {/* Div for email */}
               <div className="input-group mb-3">
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
-                  placeholder="Document number"
-                  name="document_number"
-                  value={document_number}
+                  placeholder="Ingresa tu identificacion"
+                  name="identificacion"
+                  value={identificacion}
                   onChange={onChange}
                   required
                 />
                 <div className="input-group-append">
                   <div className="input-group-text">
-                    <span className="fas fa-user" />
+                    <span className="webform submission-1" />
                   </div>
                 </div>
               </div>
-
+             
               {/* Div for password */}
               <div className="input-group mb-3">
                 <input
@@ -200,22 +191,22 @@ const CrearCuenta = () => {
                       name="terms"
                       defaultValue="agree"
                     />
-                    <label htmlFor="agreeTerms">
-                      I agree to the <Link to={"#"}>terms</Link>
-                    </label>
+                    
                   </div>
                 </div>
-                <div className="col-4">
-                  <button type="submit" className="btn btn-primary btn-block">
-                    Register
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  to={"#"}
+                  className="btn btn-block btn-primary"
+                >
+                  Crear Cuenta
+                </button>
               </div>
             </form>
             <div className="social-auth-links text-center">
               <p>- OR -</p>
               <Link to={"/"} className="btn btn-block btn-danger">
-                Cancelar
+                Ingresar
               </Link>
             </div>
             <Link to={"/"} className="text-center">

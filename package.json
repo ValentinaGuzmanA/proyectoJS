@@ -1,5 +1,5 @@
 {
-  "name": "agenda_servicios_medicos",
+  "name": "servipluss",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,7 +12,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
+    "sweet": "^0.1.1",
     "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
